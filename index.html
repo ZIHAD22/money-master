@@ -24,8 +24,8 @@
 
     <!-- main section -->
     <main>
-      <div class="container-lg">
-        <section>
+      <section>
+        <div class="container-lg">
           <div class="row">
             <div class="col-lg-6">
               <img class="w-100" src="./img/money.png" alt="" />
@@ -35,7 +35,12 @@
                 <h4 class="mb-4 text-center">Income</h4>
                 <div>
                   <h5 class="d-inline">Income:</h5>
-                  <input class="input-color" type="number" name="" id="" />
+                  <input
+                    class="input-color"
+                    type="number"
+                    name=""
+                    id="total-income"
+                  />
                 </div>
               </div>
               <div>
@@ -44,29 +49,47 @@
                   <div class="col-lg-6">
                     <div class="mb-3">
                       <label class="d-inline-block pe-2">Food:</label>
-                      <input class="input-color" type="number" name="" id="" />
+                      <input
+                        class="input-color"
+                        type="number"
+                        name=""
+                        id="cost-food"
+                      />
                     </div>
                   </div>
                   <div class="col-lg-6">
                     <div class="mb-3">
                       <label class="d-inline-block ms-3">Rent:</label>
-                      <input class="input-color" type="number" name="" id="" />
+                      <input
+                        class="input-color"
+                        type="number"
+                        name=""
+                        id="home-cost"
+                      />
                     </div>
                   </div>
                   <div class="col-lg-6">
                     <div class="mb-3">
                       <label class="d-inline-block">Clothes:</label>
-                      <input class="input-color" type="number" name="" id="" />
+                      <input
+                        class="input-color"
+                        type="number"
+                        name=""
+                        id="clothes-cost"
+                      />
                     </div>
                   </div>
                   <div class="col-lg-6">
-                    <button class="btn btn-success px-4 mb-2 mt-3">
+                    <button
+                      id="calculate-btn"
+                      class="btn btn-success px-4 mb-2 mt-3"
+                    >
                       Calculate
                     </button>
                   </div>
                 </div>
-                <h4>Total Expenses: <span>5500</span></h4>
-                <h4>Balance:<span>4500</span></h4>
+                <h4>Total Expenses: <span id="expenses-blanc">00</span></h4>
+                <h4>Balance:<span id="without-ex-blanc">00</span></h4>
               </div>
               <div>
                 <div
@@ -82,8 +105,11 @@
               </div>
             </div>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
     </main>
+
+    <!-- js file -->
+    <script src="./js/index.js"></script>
   </body>
 </html>
