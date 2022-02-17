@@ -20,12 +20,7 @@ calculateBtn.addEventListener('click', function () {
   let homeCostValue = parseInt(homeCost.value)
   let clothesCostValue = parseInt(clothesCost.value)
   if (
-    validatorIncome({
-      incomeValue,
-      foodCostValue,
-      homeCostValue,
-      clothesCostValue,
-    })
+    validatorIncome(incomeValue, foodCostValue, homeCostValue, clothesCostValue)
   ) {
     let expensesValue = foodCostValue + homeCostValue + clothesCostValue
     let restBalance = incomeValue - expensesValue
@@ -48,15 +43,16 @@ calculateBtn.addEventListener('click', function () {
 
     // saving function
     savingBtn.addEventListener('click', function () {
-      if (percentOfSave.value) {
-        const perSavingValue = parseInt(percentOfSave.value)
-        const preRestBalance = restBalance
-        const savingAmount = (restBalance * 20) / 100
-        const lastBalance = preRestBalance - savingAmount
+      const perSavingValue = parseInt(percentOfSave.value)
+      const preRestBalance = restBalance
+      const savingAmount = (restBalance * perSavingValue) / 100
+      const lastBalance = preRestBalance - savingAmount
+      if (savingValidation(perSavingValue, preRestBalance, savingAmount)) {
         savingTo.innerText = savingAmount
         remainingBalance.innerText = lastBalance
       } else {
-        console.log('Please Enter a saving percent ')
+        savingTo.innerText = '00'
+        remainingBalance.innerText = '00'
       }
     })
   }
@@ -103,36 +99,34 @@ function negInputValidate() {
 }
 
 // validation function for income section
-function validatorIncome(inObj) {
-  console.log(
-    inObj.incomeValue,
-    inObj.foodCostValue,
-    inObj.homeCostValue,
-    inObj.clothesCostValue,
-  )
-  if (
-    !inObj.incomeValue &&
-    !inObj.foodCostValue &&
-    !inObj.homeCostValue &&
-    !inObj.clothesCostValue
-  ) {
+function validatorIncome(income, foodCostValue, rent, clothesCostValue) {
+  if (!income && !foodCostValue && !rent && !clothesCostValue) {
     validationText(`Please Provide Your Details To Calculation`)
-  } else if (!inObj.incomeValue) {
+  } else if (!income) {
     validationText(`Please Provide your income on the income input `)
-  } else if (!inObj.foodCostValue) {
+  } else if (!foodCostValue) {
     validationText(`Please Provide your Food Market Budget in Food Input`)
-  } else if (!inObj.homeCostValue) {
+  } else if (!rent) {
     validationText(`Please Provide Your house rent on the rent value`)
-  } else if (!inObj.clothesCostValue) {
+  } else if (!clothesCostValue) {
     validationText(`Please Provide Your Market Budget In Clothe Input`)
   } else {
     validatorElement.classList.remove('show')
     return true
   }
-  negInputValidate(
-    inObj.incomeValue,
-    inObj.foodCostValue,
-    inObj.homeCostValue,
-    inObj.clothesCostValue,
-  )
+  negInputValidate(income, foodCostValue, rent, clothesCostValue)
+}
+
+// saving section validation
+function savingValidation(perSavingValue, preRestBalance, savingAmount) {
+  if (!perSavingValue || perSavingValue > 100) {
+    validationText('Please Provide percentage under 100% of your Saving')
+  } else if (perSavingValue < 0) {
+    validationText(
+      'Your Provided percentage is Negative Please Provide a Positive Number Of percentage',
+    )
+  } else {
+    validatorElement.classList.remove('show')
+    return true
+  }
 }
