@@ -20,7 +20,12 @@ calculateBtn.addEventListener('click', function () {
   let homeCostValue = parseInt(homeCost.value)
   let clothesCostValue = parseInt(clothesCost.value)
   if (
-    validatorIncome(incomeValue, foodCostValue, homeCostValue, clothesCostValue)
+    validatorIncome({
+      incomeValue,
+      foodCostValue,
+      homeCostValue,
+      clothesCostValue,
+    })
   ) {
     let expensesValue = foodCostValue + homeCostValue + clothesCostValue
     let restBalance = incomeValue - expensesValue
@@ -98,22 +103,36 @@ function negInputValidate() {
 }
 
 // validation function for income section
-function validatorIncome(income, foodCostValue, rent, clothesCostValue) {
-  if (!income && !foodCostValue && !rent && !clothesCostValue) {
+function validatorIncome(inObj) {
+  console.log(
+    inObj.incomeValue,
+    inObj.foodCostValue,
+    inObj.homeCostValue,
+    inObj.clothesCostValue,
+  )
+  if (
+    !inObj.incomeValue &&
+    !inObj.foodCostValue &&
+    !inObj.homeCostValue &&
+    !inObj.clothesCostValue
+  ) {
     validationText(`Please Provide Your Details To Calculation`)
-  } else if (!income) {
+  } else if (!inObj.incomeValue) {
     validationText(`Please Provide your income on the income input `)
-  } else if (!foodCostValue) {
+  } else if (!inObj.foodCostValue) {
     validationText(`Please Provide your Food Market Budget in Food Input`)
-  } else if (!rent) {
+  } else if (!inObj.homeCostValue) {
     validationText(`Please Provide Your house rent on the rent value`)
-  } else if (!clothesCostValue) {
+  } else if (!inObj.clothesCostValue) {
     validationText(`Please Provide Your Market Budget In Clothe Input`)
   } else {
     validatorElement.classList.remove('show')
     return true
   }
-  negInputValidate(income, foodCostValue, rent, clothesCostValue)
+  negInputValidate(
+    inObj.incomeValue,
+    inObj.foodCostValue,
+    inObj.homeCostValue,
+    inObj.clothesCostValue,
+  )
 }
-
-// saving section validation
