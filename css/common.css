@@ -23,3 +23,12 @@ input{
 .input-color{
     background-color: #DCDCDC;
 }
+
+
+/* responsiv section for mobile */
+
+@media screen and (max-width: 480px) {
+    .saving-section {
+      display: block !important;
+    }
+  }

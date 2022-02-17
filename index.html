@@ -32,7 +32,7 @@
             </div>
             <div class="col-lg-6 text-center bg-color p-5">
               <div>
-                <h4 class="mb-4 text-center">Income</h4>
+                <h4 class="mb-4 text-center text-success fw-bold">Income</h4>
                 <div>
                   <h5 class="d-inline">Income:</h5>
                   <input
@@ -44,7 +44,7 @@
                 </div>
               </div>
               <div>
-                <h4 class="m-3 text-center">Expenses</h4>
+                <h4 class="m-3 text-center text-success fw-bold">Expenses</h4>
                 <div class="row">
                   <div class="col-lg-6">
                     <div class="mb-3">
@@ -93,15 +93,24 @@
               </div>
               <div>
                 <div
-                  class="d-flex justify-content-center align-items-start mt-4 mb-2"
+                  class="d-flex saving-section justify-content-center align-items-start mt-4 mb-2"
                 >
-                  <h5 class="me-2">Save:</h5>
-                  <input class="input-color py-1" type="number" name="" id="" />
+                  <h5 class="me-2 text-success fw-bold">Save:</h5>
+                  <input
+                    class="input-color py-1"
+                    type="number"
+                    name=""
+                    id="saving-input"
+                  />
                   <h4 class="mx-3">%</h4>
-                  <button class="btn btn-success px-4 py-1">Save</button>
+                  <button id="saving-btn" class="btn btn-success px-4 py-1">
+                    Save
+                  </button>
                 </div>
-                <h4>Saving Amount: <span>2000</span></h4>
-                <h4>Remaining Balance: <span>2500</span></h4>
+                <h4>Saving Amount: <span id="saving-to">2000</span></h4>
+                <h4>
+                  Remaining Balance: <span id="remaining-balance">2500</span>
+                </h4>
               </div>
             </div>
           </div>
