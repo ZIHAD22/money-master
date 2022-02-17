@@ -125,6 +125,8 @@ function savingValidation(perSavingValue, preRestBalance, savingAmount) {
     validationText(
       'Your Provided percentage is Negative Please Provide a Positive Number Of percentage',
     )
+  } else if (savingAmount > preRestBalance) {
+    validationText('Your Saving Amount is getter than current Balance ')
   } else {
     validatorElement.classList.remove('show')
     return true
