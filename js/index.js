@@ -13,18 +13,20 @@ const savingTo = document.getElementById('saving-to')
 const remainingBalance = document.getElementById('remaining-balance')
 // validation
 const validatorElement = document.getElementById('validation')
-
 // income function
 calculateBtn.addEventListener('click', function () {
   let incomeValue = parseInt(mainIncome.value)
   let foodCostValue = parseInt(foodCost.value)
   let homeCostValue = parseInt(homeCost.value)
   let clothesCostValue = parseInt(clothesCost.value)
-  if (validator(incomeValue, foodCostValue, homeCostValue, clothesCostValue)) {
+  if (
+    validatorIncome(incomeValue, foodCostValue, homeCostValue, clothesCostValue)
+  ) {
     let expensesValue = foodCostValue + homeCostValue + clothesCostValue
     let restBalance = incomeValue - expensesValue
+    console.log(expensesValue, incomeValue, restBalance)
     if (
-      totalBalanceValidation(expensesValue, restBalance) &&
+      totalBalanceValidation(expensesValue, incomeValue) &&
       negInputValidate(
         incomeValue,
         foodCostValue,
@@ -34,6 +36,9 @@ calculateBtn.addEventListener('click', function () {
     ) {
       exBalance.innerText = expensesValue
       withOutExBalances.innerText = restBalance
+    } else {
+      exBalance.innerText = '00'
+      withOutExBalances.innerText = '00'
     }
 
     // saving function
@@ -64,8 +69,8 @@ function validationText(text, nameOfClass) {
 }
 
 // total balance validation
-function totalBalanceValidation(expensesValue, restBalance) {
-  if (expensesValue > restBalance) {
+function totalBalanceValidation(expensesValue, incomeValue) {
+  if (expensesValue > incomeValue) {
     validationText(
       'Your Provided Income is low than Expense. Please Provide A Valid Income That Not Low Than Expense ',
     )
@@ -92,8 +97,8 @@ function negInputValidate() {
   }
 }
 
-// validation function
-function validator(income, foodCostValue, rent, clothesCostValue) {
+// validation function for income section
+function validatorIncome(income, foodCostValue, rent, clothesCostValue) {
   if (!income && !foodCostValue && !rent && !clothesCostValue) {
     validationText(`Please Provide Your Details To Calculation`)
   } else if (!income) {
@@ -110,3 +115,5 @@ function validator(income, foodCostValue, rent, clothesCostValue) {
   }
   negInputValidate(income, foodCostValue, rent, clothesCostValue)
 }
+
+// saving section validation
