@@ -23,9 +23,18 @@ calculateBtn.addEventListener('click', function () {
   if (validator(incomeValue, foodCostValue, homeCostValue, clothesCostValue)) {
     let expensesValue = foodCostValue + homeCostValue + clothesCostValue
     let restBalance = incomeValue - expensesValue
-    
-    exBalance.innerText = expensesValue
-    withOutExBalances.innerText = restBalance
+    if (
+      totalBalanceValidation(expensesValue, restBalance) &&
+      negInputValidate(
+        incomeValue,
+        foodCostValue,
+        homeCostValue,
+        clothesCostValue,
+      )
+    ) {
+      exBalance.innerText = expensesValue
+      withOutExBalances.innerText = restBalance
+    }
 
     // saving function
     savingBtn.addEventListener('click', function () {
@@ -54,12 +63,32 @@ function validationText(text, nameOfClass) {
   return false
 }
 
+// total balance validation
+function totalBalanceValidation(expensesValue, restBalance) {
+  if (expensesValue > restBalance) {
+    validationText(
+      'Your Provided Income is low than Expense. Please Provide A Valid Income That Not Low Than Expense ',
+    )
+  } else {
+    return true
+  }
+}
+
 // negative input validation
 function negInputValidate() {
+  let result = ''
   for (const value of arguments) {
     if (value < 0) {
       validationText('Please provide positive number')
+      result = value
+      break
     }
+  }
+
+  if (result) {
+    return false
+  } else {
+    return true
   }
 }
 
